@@ -3,7 +3,7 @@ name: Deploy Application
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -19,8 +19,8 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         docker build -t your-image-name .
-        docker tag your-image-name your-docker-registry/your-image-name:latest
-        docker push your-docker-registry/your-image-name:latest
+        docker tag nginx docker hub/nginx:latest
+        docker push docker hub/nginx:latest
 
     - name: Deploy to Server
       run: |
