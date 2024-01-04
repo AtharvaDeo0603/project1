@@ -1,0 +1,28 @@
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/setup-docker@v2
+
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t your-image-name .
+        docker tag your-image-name your-docker-registry/your-image-name:latest
+        docker push your-docker-registry/your-image-name:latest
+
+    - name: Deploy to Server
+      run: |
+        # Add your deployment script or commands here
+
