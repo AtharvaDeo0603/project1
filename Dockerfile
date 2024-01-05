@@ -1,6 +1,8 @@
 FROM nginx:latest
 
-COPY ./index.html /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
+
+COPY index.html . 
 
 EXPOSE 80
 
