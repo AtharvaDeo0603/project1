@@ -6,4 +6,4 @@ COPY index.html .
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "index.html"] 
+CMD ["nginx", "-g", "daemon off;"] 
