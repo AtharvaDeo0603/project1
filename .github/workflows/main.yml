@@ -18,7 +18,7 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         docker build -t custom-nginx .
-        docker tag nginx deoatharva4/custom-nginx:latest
+        docker tag custom-nginx deoatharva4/custom-nginx:latest
         docker push deoatharva4/custom-nginx:latest
     - name: Deploy to Server
       run: |
