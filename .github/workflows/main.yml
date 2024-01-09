@@ -43,4 +43,4 @@ jobs:
           docker pull deoatharva4/custom-nginx:latest
           docker stop custom-nginx || true
           docker rm custom-nginx || true
-          docker run -d -p 1234:80 --name custom-nginx deoatharva4/custom-nginx:latest      
+          docker run -d -p 80:80 --name custom-nginx deoatharva4/custom-nginx:latest      
