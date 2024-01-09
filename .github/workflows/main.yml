@@ -22,11 +22,11 @@ jobs:
         docker tag custom-nginx deoatharva4/custom-nginx:latest
         docker push deoatharva4/custom-nginx:latest
         
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+  ##  - name: Set up SSH
+   ##   uses: webfactory/ssh-agent@v0
+     ## with:
+       ## ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Deploy to server
-      run: |
+    ##- name: Deploy to server
+      ##run: |
         
