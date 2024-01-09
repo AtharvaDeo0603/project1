@@ -1,0 +1,35 @@
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+ 
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t custom-nginx .
+        docker tag custom-nginx deoatharva4/custom-nginx:latest
+        docker push deoatharva4/custom-nginx:latest
+
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ env.HOSTNAME }}
+        username: ${{ env.USERNAME }}
+        key: ${{ env.PRIVATE_KEY }}
+        script: |
+          docker pull deoatharva4/custom-nginx:latest
+          docker stop custom-nginx || true
+          docker rm custom-nginx || true
+          docker run -d -p 80:80 --name custom-nginx deoatharva4/custom-nginx:latest
