@@ -41,6 +41,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           docker pull deoatharva4/custom-nginx:latest
-          docker stop custom-nginx || true
-          docker rm custom-nginx || true
+        #  docker stop custom-nginx || true
+       #   docker rm custom-nginx || true
           docker run -d -p 80:80 --name custom-nginx deoatharva4/custom-nginx:latest      
