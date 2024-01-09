@@ -32,8 +32,8 @@ jobs:
 
     - name: Deploy to Server
       run: |
-        ssh cloud_user@your-server-ip "docker pull deoatharva4/custom-nginx:latest"
-        ssh cloud_user@your-server-ip "docker stop custom-nginx || true"
-        ssh cloud_user@your-server-ip "docker rm custom-nginx || true"
-        ssh cloud_user@your-server-ip "docker run -d -p 1234:80 --name custom-nginx deoatharva4/custom-nginx:latest"      
+        ssh cloud_user@8a47b1701b3c.mylabserver.com "docker pull deoatharva4/custom-nginx:latest"
+        ssh cloud_user@8a47b1701b3c.mylabserver.com "docker stop custom-nginx || true"
+        ssh cloud_user@8a47b1701b3c.mylabserver.com "docker rm custom-nginx || true"
+        ssh cloud_user@8a47b1701b3c.mylabserver.com "docker run -d -p 1234:80 --name custom-nginx deoatharva4/custom-nginx:latest"      
         
