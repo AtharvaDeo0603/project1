@@ -29,4 +29,11 @@ jobs:
 
     ##- name: Deploy to server
       ##run: |
+
+    - name: Deploy to Server
+      run: |
+        ssh cloud_user@your-server-ip "docker pull deoatharva4/custom-nginx:latest"
+        ssh cloud_user@your-server-ip "docker stop custom-nginx || true"
+        ssh cloud_user@your-server-ip "docker rm custom-nginx || true"
+        ssh cloud_user@your-server-ip "docker run -d -p 1234:80 --name custom-nginx deoatharva4/custom-nginx:latest"      
         
