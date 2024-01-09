@@ -15,16 +15,18 @@ jobs:
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-
-    - name: Update Known Hosts
-      run: ssh-keyscan -t rsa 8a47b1701b3c.mylabserver.com >> %USERS%\91762\.ssh\known_hosts
  
     - name: Build and Push Docker Image
       run: |
         docker build -t custom-nginx .
         docker tag custom-nginx deoatharva4/custom-nginx:latest
         docker push deoatharva4/custom-nginx:latest
-    - name: Deploy to Server
+        
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.5
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to server
       run: |
-        ssh cloud_user@8a47b1701b3c.mylabserver.com "docker pull deoatharva4/custom-nginx:latest"
-        ssh cloud_user@8a47b1701b3c.mylabserver.com "docker run -d -p 1234:80 deoatharva4/custom-nginx:latest"
+        
