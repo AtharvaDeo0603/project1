@@ -13,11 +13,13 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
+ 
 
     - name: Build and Push Docker Image
       run: |
-        echo "${{ secrets.DOCKERPW }}" | docker login -u "deoatharva4" --password-stdin
         docker build -t custom-nginx .
         docker tag custom-nginx deoatharva4/custom-nginx:latest
         docker push deoatharva4/custom-nginx:latest
