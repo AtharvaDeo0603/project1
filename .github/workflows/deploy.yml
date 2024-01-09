@@ -25,8 +25,8 @@ jobs:
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ env.SERVER_HOST }}
-        username: ${{ env.SERVER_USERNAME }}
+        host: ${{ env.HOSTNAME }}
+        username: ${{ env.USERNAME }}
         key: ${{ env.PRIVATE_KEY }}
         script: |
           docker pull deoatharva4/custom-nginx:latest
