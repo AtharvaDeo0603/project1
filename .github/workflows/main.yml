@@ -17,6 +17,7 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
+        echo "${{ secrets.DOCKERPW }}" | docker login -u "deoatharva4" --password-stdin
         docker build -t custom-nginx .
         docker tag custom-nginx deoatharva4/custom-nginx:latest
         docker push deoatharva4/custom-nginx:latest
