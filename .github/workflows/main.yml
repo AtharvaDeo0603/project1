@@ -16,8 +16,9 @@ jobs:
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
+    - name: Update Known Hosts
+      run: ssh-keyscan -t rsa 8a47b1701b3c.mylabserver.com >> %USERS%\91762\.ssh\known_hosts
  
-
     - name: Build and Push Docker Image
       run: |
         docker build -t custom-nginx .
