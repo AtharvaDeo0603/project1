@@ -22,14 +22,4 @@ jobs:
         docker tag custom-nginx deoatharva4/custom-nginx:latest
         docker push deoatharva4/custom-nginx:latest
 
-    - name: Deploy to Server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ env.HOSTNAME }}
-        username: ${{ env.USERNAME }}
-        key: ${{ env.PRIVATE_KEY }}
-        script: |
-          docker pull deoatharva4/custom-nginx:latest
-          docker stop custom-nginx || true
-          docker rm custom-nginx || true
-          docker run -d -p 80:80 --name custom-nginx deoatharva4/custom-nginx:latest
+
