@@ -22,25 +22,22 @@ jobs:
         docker build -t custom-nginx .
         docker tag custom-nginx deoatharva4/custom-nginx:latest
         docker push deoatharva4/custom-nginx:latest
-        docker run -d -p 80:80 deoatharva4/custom-nginx:latest
 
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with: 
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    # - name: Setup SSH
-    #   uses: webfactory/ssh-agent@v0.8.0
-    #   with: 
-    #       ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    # - name: Deploy to Server
-    #   uses: appleboy/ssh-action@v1.0.3
-    #   with: 
-    #       host: ${{ secrets.HOSTNAME }} 
-    #       username:  ${{ secrets.USERNAME }}
-    #       key: ${{ secrets.SSH_PRIVATE_KEY }}
-    #       script: |
-    #             sudo su
-    #             docker ps
-    #             docker pull deoatharva4/custom-nginx:latest
-    #             docker run -d -p 80:80 deoatharva4/custom-nginx:latest
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@v1.0.3
+      with: 
+          host: ${{ secrets.HOSTNAME }} 
+          username:  ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+                docker ps
+                docker pull deoatharva4/custom-nginx:latest
+                docker run -d -p 80:80 deoatharva4/custom-nginx:latest
 
          
      
