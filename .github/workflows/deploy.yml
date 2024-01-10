@@ -32,7 +32,7 @@ jobs:
       with: 
           host: ${{ secrets.HOSTNAME }} 
           username:  ${{ secrets.USERNAME }}
-          privatekey: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
                 docker pull deoatharva4/custom-nginx:latest
                 docker run -d -p 80:80 deoatharva4/custom-nginx:latest
